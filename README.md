@@ -112,7 +112,7 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
 <pre>
     bool buscar_valor(Nodo *& lista, int n){
         Nodo *temp = lista;
-        while(temp != lista){
+        while(temp != NULL){
             if (temp -> dato == n){
                 return true; // retorna verdadero si encuentra el nodo 
             }
