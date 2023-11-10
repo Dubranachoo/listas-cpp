@@ -135,7 +135,7 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
     }
 </pre>
 
-#bueno, ahora agrego un par de funciones de listas circulares.
+# bueno, ahora agrego un par de funciones de listas circulares.
 
 ### agregar al principio de la lista circular:
 
@@ -253,6 +253,26 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
         } while (actual != lista);
 
         cout << endl;
+    }
+</pre>
+
+### recorrer lista por un valor especifico:
+
+<pre>
+    bool recorrer_lista(Nodo *& lista, std::string charla) {
+      if (lista == nullptr) {
+        return false; // La lista está vacía, no hay nada que recorrer
+      }
+
+      Nodo *temp = lista;
+      do {
+        if (temp->charla == charla) {
+        return true;
+        }
+        temp = temp->siguiente;
+      } while (temp != lista);
+
+      return false;
     }
 </pre>
 
