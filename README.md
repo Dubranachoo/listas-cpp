@@ -20,10 +20,10 @@ estas listas solo tienen una direccion de enlazado.
 ### insertar elementos al inicio:
 <pre>
     void insertar_lista(Nodo *& lista, int n){
-        Nodo *nuevo_nodo = new Nodo(); // con esto, creamos el nodo nuevo.
-        nuevo_nodo -> dato = n; // igualamos el dato del nuevo nodo con el entero n que le asignamos a la funcion
+        Nodo *nuevo_nodo = new Nodo();  // con esto, creamos el nodo nuevo.
+        nuevo_nodo -> dato = n;         // igualamos el dato del nuevo nodo con el entero n que le asignamos a la funcion
         nuevo_nodo -> siguiente = lista ; //igualamos el puntero (hacia donde apuntara este nodo).
-        lista = nuevo_nodo; // le decimos a lista que el ultimo nodo es el que creamos recien.
+        lista = nuevo_nodo;             // le decimos a lista que el ultimo nodo es el que creamos recien.
     }
 </pre>
 cada parametro de la lista, debe coincidir con los datos del struct creado como nodo.
