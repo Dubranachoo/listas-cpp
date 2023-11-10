@@ -20,11 +20,11 @@ estas listas solo tienen una direccion de enlazado.
 ### insertar elementos al inicio:
 <pre>
     void insertar_lista(Nodo *& lista, int n){
-    Nodo *nuevo_nodo = new Nodo(); // con esto, creamos el nodo nuevo.
-    nuevo_nodo -> dato = n; // igualamos el dato del nuevo nodo con el entero n que le asignamos a la funcion
-    nuevo_nodo -> siguiente = lista ; //igualamos el puntero (hacia donde apuntara este nodo).
-    lista = nuevo_nodo; // le decimos a lista que el ultimo nodo es el que creamos recien.
-}
+        Nodo *nuevo_nodo = new Nodo(); // con esto, creamos el nodo nuevo.
+        nuevo_nodo -> dato = n; // igualamos el dato del nuevo nodo con el entero n que le asignamos a la funcion
+        nuevo_nodo -> siguiente = lista ; //igualamos el puntero (hacia donde apuntara este nodo).
+        lista = nuevo_nodo; // le decimos a lista que el ultimo nodo es el que creamos recien.
+    }
 </pre>
 cada parametro de la lista, debe coincidir con los datos del struct creado como nodo.
 
@@ -86,9 +86,177 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
     }
 </pre>
 
+### eliminar un elemento especifico:
 
+<pre>
+    void eliminar_especifico(Nodo *& lista, int n){
+        Nodo *anterior = NULL;
+        Nodo *actual = lista;
 
+        while(actual != NULL && actual -> dato != n){ // recorremos la lista hasta encontrar el numero
+            anterior = actual;
+            actual = actual -> siguiente;
+        } 
+        if(actual != NULL){ 
+            if(anterior != null){ // se actualiza el nodo para "saltar" el que sera eliminado.
+                anterior -> siguiente = actual -> siguiente; 
+            }
+        }else{
+            lista = actual -> siguiente; // actualiza lista ppara el cambio de nodos
+        }
+        delete actual; //se borra el nodo actual (el nodo especifico)
+    }
+</pre>
 
+### buscar un valor en la lista:
+<pre>
+    bool buscar_valor(Nodo *& lista, int n){
+        Nodo *temp = lista;
+        while(temp != lista){
+            if (temp -> dato == n){
+                return true; // retorna verdadero si encuentra el nodo 
+            }
+        temp = temp -> siguiente; // avanza al siguiente nodo.
+        }
+        return false; // si no encuentra el nodo con ese valor, retornara falso.
+    }
+</pre>
 
+### recorrer e imprimir la lista:
 
+<pre>
+    void imprimir_lista(Nodo *& lista){
+        Nodo *temp = lista;
+        while(temp != NULL){
+            cout << temp -> dato << " -> ";
+            temp = temp -> siguiente;
+        }
+        cout << endl;
+    }
+</pre>
+
+#bueno, ahora agrego un par de funciones de listas circulares.
+
+### agregar al principio de la lista circular:
+
+<pre>
+    void insertar_al_principio(Nodo*& lista, int n) {
+        Nodo* nuevo_nodo = new Nodo();
+        nuevo_nodo->dato = n;
+    
+        // Si la lista no está vacía, encontrar el último nodo y actualizar su puntero siguiente
+            if (lista != nullptr) {
+                Nodo* ultimo = lista;
+                while (ultimo->siguiente != lista) {
+                ultimo = ultimo->siguiente;
+            }
+                ultimo->siguiente = nuevo_nodo;
+            } else {
+            // Si la lista está vacía, hacer que el nuevo nodo apunte a sí mismo
+        nuevo_nodo->siguiente = nuevo_nodo;
+        }
+
+    nuevo_nodo->siguiente = lista;
+    lista = nuevo_nodo;
+    }
+</pre>
+
+### agregar al final de la lista:
+
+<pre>
+    void insertar_al_final(Nodo*& lista, int n) {
+        Nodo* nuevo_nodo = new Nodo();
+        nuevo_nodo->dato = n;
+
+        // Si la lista está vacía, hacer que el nuevo nodo apunte a sí mismo
+           if (lista == nullptr) {
+                nuevo_nodo->siguiente = nuevo_nodo;
+                lista = nuevo_nodo;
+            } else {
+            // Encontrar el último nodo y actualizar su puntero siguiente
+                Nodo* ultimo = lista;
+                while (ultimo->siguiente != lista) {
+                ultimo = ultimo->siguiente;
+            }
+        ultimo->siguiente = nuevo_nodo;
+        nuevo_nodo->siguiente = lista;
+        }
+    }
+</pre>
+
+### buscar una posicion:
+
+<pre>
+    int buscar_posicion(Nodo* lista, int posicion) {
+            if (lista == nullptr || posicion < 0) {
+            // Puedes manejar el error de alguna manera, o simplemente devolver un valor predeterminado
+            return -1; // Otra opción podría ser lanzar una excepción en lugar de devolver un valor especial
+            }
+
+            Nodo* actual = lista;
+            int contador = 0;
+
+        do {
+            if (contador == posicion) {
+                // Devolver el valor del nodo encontrado
+                return actual->dato;
+            }
+
+            actual = actual->siguiente;
+            contador++;
+        } while (actual != lista);
+
+        // Si la posición no se encontró en la lista, podrías devolver un valor predeterminado o manejarlo de alguna otra manera
+        return -1; // Otra opción podría ser lanzar una excepción en lugar de devolver un valor especial
+    }
+</pre>
+
+### insertar en una posicion especifica:
+
+<pre>
+    void insertar_en_posicion(Nodo*& lista, int n, int posicion) {
+       Nodo* nuevo_nodo = new Nodo();
+        nuevo_nodo->dato = n;
+
+        if (posicion == 0) {
+            insertar_al_principio(lista, n);
+            return;
+        }
+
+        Nodo* anterior = buscar_posicion(lista, posicion - 1);
+
+        if (anterior == nullptr) {
+            cout << "La posición no es válida." << endl;
+            delete nuevo_nodo;
+            return;
+        }
+
+        nuevo_nodo->siguiente = anterior->siguiente;
+        anterior->siguiente = nuevo_nodo;
+    }
+</pre>
+
+### mostrar lista circular:
+
+<pre>
+    void mostrar_lista(Nodo* lista) {
+       if (lista == nullptr) {
+            cout << "La lista está vacía." << endl;
+            return;
+        }
+
+        Nodo* actual = lista;
+
+        do {
+            cout << actual->dato << " ";
+            actual = actual->siguiente;
+        } while (actual != lista);
+
+        cout << endl;
+    }
+</pre>
+
+# si hay alguna que falte, manden...
+
+# @nachoodubra 2023
 
