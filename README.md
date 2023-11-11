@@ -276,6 +276,50 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
     }
 </pre>
 
+### eliminar un valor especifico de la lista.
+<pre>
+    void eliminar_nodo(Nodo*& lista, int dato_a_eliminar) {
+    if (lista == nullptr) {
+        cout << "La lista está vacía. No se puede eliminar el nodo." << endl;
+        return;
+    }
+
+    Nodo* actual = lista;
+    Nodo* anterior = nullptr;
+
+    do {
+        if (actual->dato == dato_a_eliminar) {
+            if (actual == lista) {
+                if (actual->siguiente == lista) {
+                    delete actual;
+                    lista = nullptr;
+                } else {
+                    Nodo* ultimo = lista;
+                    while (ultimo->siguiente != lista) {
+                        ultimo = ultimo->siguiente;
+                    }
+                    ultimo->siguiente = actual->siguiente;
+                    lista = actual->siguiente;
+                    delete actual;
+                }
+            } else {
+                anterior->siguiente = actual->siguiente;
+                delete actual;
+            }
+
+            cout << "Nodo con el dato " << dato_a_eliminar << " eliminado exitosamente." << endl;
+            return;
+        }
+
+        anterior = actual;
+        actual = actual->siguiente;
+    } while (actual != lista);
+
+    cout << "El dato no se encuentra en la lista." << endl;
+}
+
+</pre>
+
 # si hay alguna que falte, manden...
 
 # @nachoodubra 2023
