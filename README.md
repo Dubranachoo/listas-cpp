@@ -154,9 +154,9 @@ void insertar_inicio(Nodo *&lista, int n) {
         ultimo->siguiente = nuevo_nodo;
     } else {
         nuevo_nodo->siguiente = nuevo_nodo;
-        lista = nuevo_nodo;
+        
     }
-
+    lista = nuevo_nodo;
     std::cout << "agregado correctamente." << std::endl;
 }
 
