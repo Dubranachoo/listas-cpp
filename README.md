@@ -140,25 +140,26 @@ cada parametro de la lista, debe coincidir con los datos del struct creado como 
 ### agregar al principio de la lista circular:
 
 <pre>
-    void insertar_al_principio(Nodo*& lista, int n) {
-        Nodo* nuevo_nodo = new Nodo();
-        nuevo_nodo->dato = n;
     
-        // Si la lista no está vacía, encontrar el último nodo y actualizar su puntero siguiente
-            if (lista != nullptr) {
-                Nodo* ultimo = lista;
-                while (ultimo->siguiente != lista) {
-                ultimo = ultimo->siguiente;
-            }
-                ultimo->siguiente = nuevo_nodo;
-            } else {
-            // Si la lista está vacía, hacer que el nuevo nodo apunte a sí mismo
-        nuevo_nodo->siguiente = nuevo_nodo;
-        }
+void insertar_inicio(Nodo *&lista, int n) {
+    Nodo *nuevo_nodo = new Nodo();
+    nuevo_nodo->cuit = n;
 
-    nuevo_nodo->siguiente = lista;
-    lista = nuevo_nodo;
+    if (lista != nullptr) {
+        Nodo *ultimo = lista;
+        while (ultimo->siguiente != lista) {
+            ultimo = ultimo->siguiente;
+        }
+        nuevo_nodo->siguiente = lista;
+        ultimo->siguiente = nuevo_nodo;
+    } else {
+        nuevo_nodo->siguiente = nuevo_nodo;
+        lista = nuevo_nodo;
     }
+
+    std::cout << "agregado correctamente." << std::endl;
+}
+
 </pre>
 
 ### agregar al final de la lista:
